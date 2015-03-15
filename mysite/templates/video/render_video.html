@@ -1,0 +1,75 @@
+{% load i18n %}
+
+{% comment %}{% load oembed_tags %}{% endcomment %}
+
+
+{% if video_type == 'basicvideo' %}
+		<div data-swf="{{ MEDIA_URL }}flowplayer/flowplayer.swf"
+		class="flowplayer play-button"
+		data-ratio="0.5625" data-embed="false" data-analytics="[Your analytics ID]">
+			<video style="background: black;">
+				{% for video in video_instance.basicvideo.html5video_set.all %}
+				<source src="http://localhost:8888/videoapp{{ video.video_file.url }}" type="{{ video.get_video_type_display }}"/>
+				{% endfor %}
+				Your browser does not support the Video Tag.
+			</video>
+
+		</div>
+{% endif %}
+
+
+{% if video_type == 'flashvideo' %}
+
+	<script type="text/javascript" src="{{ MEDIA_URL }}flowplayer/flash/flowplayer-3.2.12.min.js"></script>
+
+    {% comment %}
+        To use the flashplayer option, you need to have a flashplayer installed
+        for your site. FlowPlayer is a good choice (http://flowplayer.org/).
+
+        If you have a flashplayer installed, you need to customize this
+        template and add the neccesarry HTML required for the flash
+        player you chose.
+
+        Here is a example, using flowplayer:
+
+        <a href="{{ video_instance.flashvideo.flv_file.url }}"
+            style="display: block; width={{ width }}; height={{ height }};"
+            id="player"> </a>
+    {% endcomment %}
+		
+		<a
+				href="http://localhost:8888/videoapp{{ video_instance.flashvideo.flv_file.url }}"
+				style="display: block; width: {{ width }}px; height: {{ height }}px;"
+				id="player">
+		</a>
+
+    <!--<p>The player has been disabled in the demo app. See the template,
+        <code>videostream/include/render_video.html</code>.
+
+    <p>Just for reference, the flv file is: <code>{{ video_instance.flashvideo.flv_file.url }}</code>-->
+		
+		<script type="text/javascript">	
+		flowplayer("player", "{{ MEDIA_URL }}flowplayer/flash/flowplayer-3.2.16.swf");
+		</script>
+
+{% endif %}
+
+{% if video_type == 'embedvideo' %}
+
+    {% comment %}
+    
+        If we have the video_code, then we use that to embed the video.
+        If not then we will use django-oembed to display the video directly
+        from the url.
+        Make sure you have django-oembed installed.
+
+    {% endcomment %}
+
+    {% if video_instance.embedvideo.video_code %}
+        {{ video_instance.embedvideo.video_code|safe }}
+    {% else %}
+        {% comment %}{% oembed %}{{ video_instance.embedvideo.video_url }}{% endoembed %}{% endcomment %}
+				<pre>OEMBED is not installed, open file 'videoapp/mysite/templates/video/render_video.html'</pre>
+    {% endif %}
+
+{% endif %}

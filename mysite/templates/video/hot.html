@@ -1,0 +1,51 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="content movies-container">
+	<h2 class="content-subhead subhead-movie-margin">
+		{% trans 'Movies of the moment' %}
+		
+		{% ifequal by 'all' %}
+		{% trans 'of all time' %}
+		{% endifequal %}
+		
+		{% ifequal by 'day' %}
+		{% trans 'of today' %}
+		{% endifequal %}
+		
+		{% ifequal by 'month' %}
+		{% trans 'of this month' %}
+		{% endifequal %}
+		
+		{% ifequal by 'year' %}
+		{% trans 'of this year' %}
+		{% endifequal %}
+	</h2>
+	<p class="subhead-movie-second subhead-movie-margin">
+		{% trans 'By' %}
+		
+		<span class="link-list"><a href="{% url 'hot_by' by='day' %}">{% trans 'day' %}</a></span>
+		<span class="link-list"><a href="{% url 'hot_by' by='month' %}">{% trans 'month' %}</a></span>
+		<span class="link-list"><a href="{% url 'hot_by' by='year' %}">{% trans 'year' %}</a></span>
+		
+	</p>
+	
+	<div class="pure-g-r" id="latest-movies">
+	{% for movie in hot %}
+	{% include 'templates/video/movie-el.html' %}
+	{% empty %}
+	<aside>
+		<p>
+		{% blocktrans %}
+		There are no movies here
+		{% endblocktrans %}
+		</p>
+	</aside>
+	{% endfor %}
+	</div>
+	
+</div>
+
+{% endblock %}

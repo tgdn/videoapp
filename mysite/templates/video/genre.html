@@ -1,0 +1,25 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="content movies-container">
+	<h2 class="content-subhead subhead-movie-margin">{{ genre.title }}</h2>
+	
+	<div class="pure-g-r" id="latest-movies">
+	{% for movie in movies %}
+	{% include 'templates/video/movie-el.html' %}
+	{% empty %}
+	<aside>
+		<p>
+		{% blocktrans %}
+		There are no movies here
+		{% endblocktrans %}
+		</p>
+	</aside>
+	{% endfor %}
+	</div>
+	
+</div>
+
+{% endblock %}

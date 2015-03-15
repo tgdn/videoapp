@@ -1,0 +1,52 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+body {
+	background-color: #eaedf1;
+}
+#layout {
+	padding-left: 0 !important;
+}
+
+</style>
+
+<div class="pure-u-1-4 form-block">
+	<form class="pure-form pure-form-aligned" action="." method="post">
+		{% csrf_token %}
+		<fieldset>
+			<legend>{% trans 'Sign in' %}</legend>
+			<br/>
+			{% for field in form %}
+			<div class="pure-control-group">
+				{% ifequal field.html_name 'password' %}
+				<input class="pure-input-xlarge" type="password" name="{{ field.html_name }}" id="id_{{ field.html_name }}" placeholder="{% trans 'Password' %}">
+				{% else %}
+				<input class="pure-input-xlarge" type="text" name="{{ field.html_name }}" id="id_{{ field.html_name }}" placeholder="{% trans 'Username' %}"  value="{% if field.value %}{{ field.value }}{% endif %}">
+				{% endifequal %}
+			</div>
+			<br/>
+			{% endfor %}
+			
+			<button type="submit" class="pure-button pure-button-success"><b>{% trans 'LOG IN' %}</b></button>
+			&nbsp;
+	    <label class="checkbox">
+	      <input type="checkbox" id="optionsCheckbox" value="option1">
+	      {% trans 'Remember me' %}
+	    </label>
+			
+		</fieldset>
+	</form>
+</div>
+
+
+<div class="pure-u-1-3 request-pass-block">
+	<h2>{% blocktrans %}
+		Or <a href="/request/">request</a> a password
+		{% endblocktrans %}</h2>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="content genres-container">
+	<h2 class="content-subhead">{% trans 'Genres' %}</h2>
+	
+	<div class="pure-g-r" id="genres">
+		{% for genre in genres %}
+		<a href="{% url 'genre' slug=genre.slug %}" class="genre-el pure-u-1-4">
+			{{ genre.title|upper }}
+		</a>
+		{% endfor %}
+	</div>
+	
+</div>
+
+{% endblock %}

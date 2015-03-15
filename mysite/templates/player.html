@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css"
+      href="http://releases.flowplayer.org/5.4.3/skin/minimalist.css">
+   
+   <style>
+   /* site specific styling */
+   body {
+      font: 12px "Myriad Pro", "Lucida Grande", "Helvetica Neue", sans-serif;
+      text-align: center;
+      padding-top: 1%;
+      color: #999;
+      background-color: #333333;
+   }
+
+   /* custom player skin */
+   .flowplayer { width: 80%; background-color: #222; background-size: cover; max-width: 800px; }
+   .flowplayer .fp-controls { background-color: rgba(0, 0, 0, 0.61)}
+   .flowplayer .fp-timeline { background-color: rgba(204, 204, 204, 1)}
+   .flowplayer .fp-progress { background-color: rgba(0, 167, 200, 1)}
+   .flowplayer .fp-buffer { background-color: rgba(249, 249, 249, 1)}
+   .flowplayer { background-image: url(http://farm5.staticflickr.com/4117/4870052004_c0997bcf8d_b.jpg)}
+
+   </style>
+
+   <!-- flowplayer depends on jQuery 1.7.1+ -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+   <!-- flowplayer javascript component -->
+   <script src="//releases.flowplayer.org/5.4.3/flowplayer.min.js"></script>
+
+</head>
+
+<body>
+
+   <p>Video dimensions won't probably match your player</p>
+
+   <div data-swf="//releases.flowplayer.org/5.4.3/flowplayer.swf"
+      class="flowplayer play-button"
+       data-ratio="0.416" data-embed="false" data-analytics="[Your analytics ID]">
+      <video>
+         <source type="video/webm" src="http://stream.flowplayer.org/bauhaus/624x260.webm"/>
+<source type="video/mp4" src="http://stream.flowplayer.org/bauhaus/624x260.mp4"/>
+<source type="video/ogv" src="http://stream.flowplayer.org/bauhaus/624x260.ogv"/>
+      </video>
+      
+   </div>
+
+</body>
+</html>

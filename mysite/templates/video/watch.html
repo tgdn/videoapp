@@ -1,0 +1,47 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+{% comment %}{% load oembed_tags %}{% endcomment %}
+{% load videostream_tags %}
+
+{% block extra_head %}
+<link href="{{ MEDIA_URL }}flowplayer/skin/minimalist.css" rel="stylesheet">
+<style>
+/* custom player skin */
+.flowplayer { /*width: 80%*/; background-color: black; background-size: cover; /*padding: 50px inherit;*/ /*max-width: 800px;*/ }
+.flowplayer .fp-controls { background-color: rgba(0, 0, 0, 0.61)}
+.flowplayer .fp-timeline { background-color: rgba(204, 204, 204, 1)}
+.flowplayer .fp-progress { background-color: rgba(0, 167, 200, 1)}
+.flowplayer .fp-buffer { background-color: rgba(249, 249, 249, 1)}
+/*.flowplayer { background-image: url(http://farm5.staticflickr.com/4117/4870052004_c0997bcf8d_b.jpg)}*/
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="content player-container">
+	<h2 class="content-subhead subhead-movie-margin">{{ video.title }}</h2>
+	
+	<div class="pure-g-r" id="movie-player">
+		
+		<!-- Render video -->
+		
+			{% render_video video 800 600 %}
+			
+	</div>
+	
+	
+	{% if info %}
+	<div class="pure-g-r" id="movie-info">
+		<ul>
+			<li><b>{% trans 'Plot:' %}</b> {{ info.plot_short }}</li>
+		</ul>
+		
+	</div>
+	{% endif %}
+	
+</div>
+
+<!-- flowplayer javascript -->
+<script type="text/javascript" src="{{ MEDIA_URL }}flowplayer/flowplayer.min.js"></script>
+
+{% endblock %}

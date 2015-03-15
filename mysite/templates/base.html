@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Thomas Gak-Deluen">
+    
+    <!-- Le styles -->
+    <!--<link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">-->
+		<link href="{{ MEDIA_URL }}css/pure-min.css" rel="stylesheet">
+		<link href="{{ MEDIA_URL }}css/baby-blue.css" rel="stylesheet">
+		<link href="{{ MEDIA_URL }}css/font-awesome.min.css" rel="stylesheet">
+		
+
+		<link href="{{ MEDIA_URL }}less/bootstrap.css" rel="stylesheet">
+		
+		<!--[if IE 7]>
+		  <link href="{{ MEDIA_URL }}css/font-awesome-ie7.min.css" rel="stylesheet">
+		<![endif]-->
+		
+    <!--<link href="{{ MEDIA_URL }}css/application.css" rel="stylesheet">-->
+    
+    <!-- jquery -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.9.1.min.js"></script>
+    <!--<script type="text/javascript" src="{{ MEDIA_URL }}js/underscore-min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/backbone-min.js"></script>-->
+
+
+			<!-- fonts -->
+			<style type="text/css" style="display:none">@font-face{font-family:'Lato';font-style:normal;font-weight:300;src:local('Lato Light'),local('Lato-Light'),url({{ MEDIA_URL }}fonts/lato-light.woff) format('woff');}@font-face{font-family:'Lato';font-style:normal;font-weight:400;src:local('Lato Regular'),local('Lato-Regular'),url({{ MEDIA_URL }}fonts/lato-regular.woff) format('woff');}@font-face{font-family:'Lato';font-style:normal;font-weight:700;src:local('Lato Bold'),local('Lato-Bold'),url({{ MEDIA_URL }}fonts/lato-bold.woff) format('woff');}@font-face{font-family:'Lato';font-style:normal;font-weight:900;src:local('Lato Black'),local('Lato-Black'),url({{ MEDIA_URL }}fonts/lato-black.woff) format('woff');}@font-face{font-family:'Lato';font-style:italic;font-weight:300;src:local('Lato Light Italic'),local('Lato-LightItalic'),url({{ MEDIA_URL }}fonts/lato-light-italic.woff) format('woff');}@font-face{font-family:'Lato';font-style:italic;font-weight:400;src:local('Lato Italic'),local('Lato-Italic'),url({{ MEDIA_URL }}fonts/lato-italic.woff) format('woff');}@font-face{font-family:'Lato';font-style:italic;font-weight:700;src:local('Lato Bold Italic'),local('Lato-BoldItalic'),url({{ MEDIA_URL }}fonts/lato-bold-italic.woff) format('woff');}@font-face{font-family:'Lato';font-style:italic;font-weight:900;src:local('Lato Black Italic'),local('Lato-BlackItalic'),url({{ MEDIA_URL }}fonts/lato-black-italic.woff) format('woff');}
+
+			</style>
+			
+
+    <script type="javascript">
+    /* <![CDATA[ */
+      var $j = jQuery.noConflict();
+          /*MEDIA_URL = "{{ MEDIA_URL }}",
+          authenticated = {% if user.is_authenticated %}1{% else %}0{% endif %},
+          page = "{{ pid }}";*/
+      
+      // Thank you twitter
+      function bust () {
+        document.write = "";
+        window.top.location = window.self.location;
+        setTimeout(function() {
+          document.body.innerHTML = '';
+          }, 0);
+        window.self.onload = function(evt) {
+          document.body.innerHTML = '';
+        };
+      }
+      if (window.top !== window.self) { // are you trying to put self in an iframe?
+        try {
+          if (window.top.location.host) { // this is illegal to access unless you share a non-spoofable document domain
+            // fun times
+          } else {
+            bust(); // chrome executes this
+          }
+        } catch (ex) {
+          bust(); // everyone executes this
+        }
+      }
+    /* ]]> */
+    </script>
+		
+		<style>
+		
+		body {
+			background: none;
+			font-family: 'Lato',sans-serif!important;
+		}
+		
+		/* very important */
+		*, a:focus, input:focus, button:focus, img:focus, select:focus {
+		  outline: none !important;
+			letter-spacing: normal !important;
+		}
+		
+		.right { float: right; }
+		
+		.left { float: left; }
+		
+		/* pure buttons extras */
+		.pure-button {
+			color: #444 !important;
+		}
+		
+		.pure-button,
+		.pure-button-success,
+		.pure-button-error,
+		.pure-button-warning,
+		.pure-button-secondary {
+			padding: 1em 2.4em 0.7em;
+			font-size: 90% !important;
+			color: white !important;
+			border-radius: 2px 2px 2px 2px;
+			text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+			font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+		}
+
+		.pure-button-success {
+			/*background: rgb(28, 184, 65);*/ /* this is a green */
+			background: #34AD81;
+		}
+
+		.pure-button-error {
+			background: rgb(202, 60, 60); /* this is a maroon */
+		}
+
+		.pure-button-warning {
+			background: rgb(223, 117, 20); /* this is an orange */
+		}
+
+		.pure-button-secondary {
+			background: rgb(66, 184, 221); /* this is a light blue */
+			/* or */
+			/* background: #1b98f8; */
+		}
+
+		.pure-button-xsmall {
+			font-size: 70%;
+		}
+
+		.pure-button-small {
+			font-size: 85%;
+		}
+
+		.pure-button-large {
+			font-size: 110%;
+		}
+
+		.pure-button-xlarge {
+			font-size: 125%;
+		}
+		
+		.pure-input-xlarge {
+			font-size: 125% !important;
+		}
+		
+		/* menu adds */
+		#menu {
+			overflow-y: visible;
+		}
+		#menu .pure-menu {
+			min-height: 98%;
+			height: auto !important;
+			height: 98%;
+			margin: 0 auto -65px; /* Negative indent footer by it's height */
+		}
+		
+		#menu .author-note {
+			font-size:90%;
+			font-weight: lighter;
+			font-style: italic;
+			text-align: center;
+			padding: 8px 10px;
+			text-shadow: 1px -1px 0 black;
+			-webkit-font-smoothing: auto;
+			font-smooth: always;
+			text-rendering: auto;
+		}
+		
+		#menu .author-note .icon-heart {
+			font-size: .8em;
+			margin-left: 3px;
+			margin-right: 3px;
+			text-shadow: 0 0 2px black;
+		}
+		
+		/* search box */
+		#search-box {
+			left: 150px;
+			max-width: 300px;
+			width: 300px;
+		}
+		
+		#search-box .popover-title {
+			padding: 6px 7px;
+		}
+		
+		#search-box .popover-title input[type=text].form-control {
+			width: 91%;
+			height: 28px;
+		}
+		
+		
+		.content.movies-container {
+			width: 90%;
+			margin-left: 8%;
+		}
+		
+		.content.player-container {
+			width: 82%;
+			margin-left: 8%;
+		}
+		
+		.content.genres-container {
+			width: 93%;
+			margin-left: 5%;
+		}
+		
+		/* fixes the alignment of subhead and movies */
+		.subhead-movie-margin {
+			padding-left: 20px;
+		}
+		
+		/* this is a paragraph that may include links to have further options to display or select videos/elements */
+		.subhead-movie-second {
+			font-weight: 300; /* just make it look neater */
+			margin-left: 50px;
+		}
+		
+		.subhead-movie-second > .link-list {
+			margin-left: 20px;
+			font-weight: normal; /* make it more visible */
+		}
+		
+		.subhead-movie-second > .link-list > a {
+			color: #3B8BBA !important; /* keep links of the same colour */
+		}
+		
+		/* movie element */
+		a.movie-el {
+			position: relative;
+			min-height: 350px;
+			width: 193px !important;
+			text-decoration: none;
+			color: #777 !important;
+			/*margin: 0 2.5%;*/
+			/*margin-right: 5%;*/
+			margin:0 20px;
+		}
+		
+		a.movie-el img.movie-poster {
+			height: 286px;
+			width: 100%;
+			background: #cacaca;
+			border: 1px solid #ccc;
+			display: block;
+			margin-bottom:8px;
+		}
+		
+		a.movie-el i.poster-missing-icon {
+			font-size: 30px;
+			display: block;
+			position: absolute;
+			left: 82px;
+			top: 119px;
+			text-shadow: 0 0 6px white;
+			color: #464646;
+		}
+		
+		a.movie-el:hover {
+			color: #333 !important;
+		}
+		a.movie-el:hover img.movie-poster {
+			border: 1px solid #aaa;
+		}
+		
+		/* genre element */
+		#genres {
+			margin-top: 50px;
+		}
+		
+		a.genre-el {
+			position: relative;
+			/*height: 200px;*/
+			width: 300px !important;
+			text-decoration: none;
+			color: #777 !important;
+			margin: 0 20px 40px;
+			text-align: center;
+			background-color: #eee;
+			border-radius: 3px 3px 3px 3px;
+			font-size: 26px;
+			padding-top:82px;
+			padding-bottom: 92px;
+			text-shadow: 0px 1px #fff;
+		}
+		
+		a.genre-el:hover {
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=0);
+	    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.05)));
+	    background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.15));
+	    background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.05));
+	    background-image: -ms-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.15));
+	    background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.05));
+	    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.05));
+			color: #555 !important ;
+		}
+		
+		a.genre-el:active {
+			box-shadow:0 0 6px rgba(0,0,0, 0.20) inset;
+		}
+		
+		
+		/* login */
+		
+		.form-block {
+			width: 290px;
+			display: block !important;
+			margin: 50px auto;
+			border-radius: 2px 2px 2px 2px;
+			background-color: white;
+			padding: 20px 40px;
+		}
+		
+		.form-block input[type=text],
+		.form-block input[type=password] {
+			box-shadow: none;
+			border-width: 2px;
+		}
+		
+		.form-block input[type=text]:focus,
+		.form-block input[type=password]:focus {
+			border-color:	#a0a0a0;
+		}
+		
+		.request-pass-block {
+			width: 290px;
+			display: block !important;
+			margin: auto;
+			text-align: center;
+		}
+		
+		.submit-request-form-btn {
+			display: block;
+			margin: auto !important;
+		}
+		
+		/*a.movie-el label.movie-title*/
+		
+		/* header */
+		.global-header .pure-menu {
+			padding: .5em;
+		}
+		
+		
+		/* bootstrap form-control */
+		.form-control:-moz-placeholder {
+		  color: #999999;
+		}
+		.form-control::-moz-placeholder {
+		  color: #999999;
+		}
+		.form-control:-ms-input-placeholder {
+		  color: #999999;
+		}
+		.form-control::-webkit-input-placeholder {
+		  color: #999999;
+		}
+		.form-control {
+		  display: block;
+		  width: 100%;
+		  height: 38px;
+		  padding: 8px 12px;
+		  font-size: 14px;
+		  line-height: 1.428571429;
+		  color: #555555;
+		  vertical-align: middle;
+		  background-color: #ffffff;
+		  border: 1px solid #cccccc;
+		  border-radius: 4px;
+		  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		}
+		.form-control:focus {
+		  border-color: rgba(82, 168, 236, 0.8);
+		  outline: 0;
+		  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+		  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+		}
+		.form-control[disabled],
+		.form-control[readonly],
+		fieldset[disabled] .form-control {
+		  cursor: not-allowed;
+		  background-color: #eeeeee;
+		}
+
+		
+		</style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!--<link rel="shortcut icon" href="../assets/ico/favicon.ico">-->
+		
+		{% block extra_head %}{% endblock %}
+  </head>
+
+  <body>
+		
+		<div class="pure-g-r " id="layout">
+			<!-- HEADER -->
+			{% if user.is_authenticated %}
+			{% include 'templates/header.html' %}
+			{% endif %}
+		
+		
+			<!-- CONTENT -->
+			<div class="pure-u" id="main">
+				{% block content %}
+				{% endblock %}
+			</div>
+		
+			<!-- FOOTER -->
+		
+			{% include 'templates/footer.html' %}
+		</div>
+
+
+
+
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--<script type="text/javascript" src="{{ MEDIA_URL }}js/bootstrap.min.js"></script>-->
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/rainbow-min.js"></script>
+		
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/tooltip.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/popover.js"></script>
+		
+		<script type="text/javascript">
+		
+		$('html').on('click', function() {
+				$('.popover').hide();
+		});
+		
+		$('.popover').on('click', function(e) {
+				e.stopPropagation();
+		})
+		
+		function updatePosition() {
+				var arrowPosY = $('#search-box').height()/2;
+				$('#search-box').css('top', -1 * arrowPosY + 21 + 'px');
+		}
+		
+		$('.popover').popover({
+				placement: $(this).attr('data-placement'),
+		}).popover('show');
+		
+		$('[data-toggle=popover]').on('click', function(e) {
+			
+				e.stopPropagation();
+				var parent = $(this).parent();
+				parent.find('.popover').toggle();
+			
+				if (parent.find('.popover').attr('id') === 'search-box' && parent.find('.popover').css('display') === 'block') {
+					parent.find('.popover').find('input.search-input').focus()
+				}
+			
+		});
+		
+		var searchBlurColor = 'transparent';
+		var searchBlurShadow = 'none';
+		
+		var searchFocusColor = '#555';
+		var searchFocusShadow = 'rgb(80, 80, 80) 0px 0px 20px inset';
+		
+		// update some css
+		$('#id_search')
+			.on('focus', function() {
+					$(this).css({
+							'backgroundColor': searchFocusColor,
+							'boxShadow': searchFocusShadow
+					});
+			})
+			.on('blur', function() {
+					$(this).css({
+							'backgroundColor': searchBlurColor,
+							'boxShadow': searchBlurShadow
+					});
+			});
+		
+		updatePosition();
+		
+		
+		</script>
+
+  </body>
+</html>

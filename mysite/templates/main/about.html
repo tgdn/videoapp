@@ -1,0 +1,18 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="header pure-u-1">
+	<h1 class="pure-u-1">{% trans 'About' %}</h1>
+	<h2 class="pure-u">{% trans 'A little bit about us' %}</h2>
+</div>
+
+<div class="content">
+	<h2 class="content-subhead subhead-movie-margin">{% blocktrans %}
+		<!--We're just a bunch of kids playing with powerful computers.-->
+	{% endblocktrans %}
+</h2>
+</div>
+
+{% endblock %}

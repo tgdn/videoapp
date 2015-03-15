@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<a href="{% url 'watch' video_id=movie.pk %}" class="movie-el pure-u-1-5">
+	<img class="movie-poster" src="{% if movie.videoinfo_set.all.0.poster %}{{ movie.videoinfo_set.all.0.poster }}{% endif %}" />
+	{% if not movie.videoinfo_set.all.0.poster %}
+	<i class="icon-film poster-missing-icon"></i>
+	{% endif %}
+	<span class="movie-title">{{ movie.title }}</span>
+	<!--<span class="movie-views">{{ movie.videoview_set.all|length }}</span>-->
+</a>

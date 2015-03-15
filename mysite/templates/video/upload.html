@@ -1,0 +1,26 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<script type="text/javascript" src="{{ MEDIA_URL }}js/fileuploader-custom.js"></script>
+
+<div class="header pure-u-1">
+	<h1 class="pure-u-1">{% trans 'Upload' %}</h1>
+	<h2 class="pure-u">{% trans 'Upload a new movie' %}</h2>
+</div>
+
+<div class="content">
+	<h2 class="content-subhead subhead-movie-margin">{% blocktrans %}
+	{% endblocktrans %}
+	</h2>
+	
+	<!-- uploader content -->
+	
+	<!-- uploader javascript -->
+	<script type="text/javascript">
+	</script>
+	
+</div>
+
+{% endblock %}

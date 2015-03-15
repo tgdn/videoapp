@@ -1,0 +1,46 @@
+{% extends 'templates/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+body {
+	background-color: #eaedf1;
+}
+#layout {
+	padding-left: 0 !important;
+}
+
+</style>
+
+<div class="pure-u-1-4 form-block">
+	<form class="pure-form pure-form-aligned" action="." method="post">
+		{% csrf_token %}
+		<fieldset>
+			<legend>{% trans 'Request an account' %}</legend>
+			<br/>
+			{% for field in form %}
+			<div class="pure-control-group">
+				<input class="pure-input-xlarge" type="text" name="{{ field.html_name }}" id="id_{{ field.html_name }}" placeholder="{{ field.label }}"  value="{% if field.value %}{{ field.value }}{% endif %}">
+				{% for error in field.errors %}
+				<p>{{ error }}</p>
+				{% endfor %}
+			</div>
+			<br/>
+			{% endfor %}
+			
+			<button type="submit" class="pure-button pure-button-success submit-request-form-btn"><b>{% trans 'REQUEST' %}</b></button>
+			
+		</fieldset>
+	</form>
+</div>
+
+
+<div class="pure-u-1-3 request-pass-block">
+	<h2>{% blocktrans %}
+		Already have an account? <a href="/sign_in/">Log In</aW
+		{% endblocktrans %}</h2>
+</div>
+
+{% endblock %}

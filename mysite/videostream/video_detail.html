@@ -1,0 +1,11 @@
+
+{% load videostream_tags %}
+
+{% if video %}
+
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.description }}</p>
+
+    {% render_video object %}
+
+{% endif %}
